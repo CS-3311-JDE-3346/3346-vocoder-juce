@@ -1,5 +1,10 @@
 # vocoder-juce
 
+Compilation must be done either in Linux or in WSL
+
+## Setup Clang
+https://ubuntuhandbook.org/index.php/2023/09/how-to-install-clang-17-or-16-in-ubuntu-22-04-20-04/
+
 ## Setup Emscripten
 
 Instructions to setup Emscripten environment can be found here: https://emscripten.org/docs/getting_started/downloads.html
