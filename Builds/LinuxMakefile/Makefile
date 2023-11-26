@@ -73,6 +73,7 @@ endif
 
 OBJECTS_CONSOLEAPP := \
   $(JUCE_OBJDIR)/FileTests_4c5a8458.o \
+  $(JUCE_OBJDIR)/vocshell_7f009378.o \
   $(JUCE_OBJDIR)/voclib_3550e74e.o \
   $(JUCE_OBJDIR)/Main_90ebc5c2.o \
   $(JUCE_OBJDIR)/Vocoder_4f69376d.o \
@@ -98,6 +99,11 @@ $(JUCE_OUTDIR)/$(JUCE_TARGET_CONSOLEAPP) : $(OBJECTS_CONSOLEAPP) $(JUCE_OBJDIR)/
 $(JUCE_OBJDIR)/FileTests_4c5a8458.o: ../../Source/Tests/FileTests.cpp
 	-$(V_AT)mkdir -p $(@D)
 	@echo "Compiling FileTests.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_CONSOLEAPP) $(JUCE_CFLAGS_CONSOLEAPP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/vocshell_7f009378.o: ../../Source/Lib/shell/vocshell.cpp
+	-$(V_AT)mkdir -p $(@D)
+	@echo "Compiling vocshell.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_CONSOLEAPP) $(JUCE_CFLAGS_CONSOLEAPP) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/voclib_3550e74e.o: ../../Source/Lib/voclib.cpp

@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Tests\FileTests.cpp"/>
+    <ClCompile Include="..\..\Source\Lib\shell\vocshell.cpp"/>
     <ClCompile Include="..\..\Source\Lib\voclib.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\Source\Vocoder.cpp"/>
@@ -810,6 +811,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\Tests\FileTests.h"/>
     <ClInclude Include="..\..\Source\Tests\TestsHeader.h"/>
+    <ClInclude Include="..\..\Source\Lib\shell\dr_wav.h"/>
     <ClInclude Include="..\..\Source\Lib\voclib.h"/>
     <ClInclude Include="..\..\Source\Vocoder.h"/>
     <ClInclude Include="..\..\..\..\cpp\lib\juce_emscripten\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h"/>
