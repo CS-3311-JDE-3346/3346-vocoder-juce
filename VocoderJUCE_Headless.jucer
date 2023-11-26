@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="QFGHiY" name="VocoderJUCE_Headless" projectType="consoleapp"
+              useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
+              jucerFormatVersion="1">
+  <MAINGROUP id="DCPjHw" name="VocoderJUCE_Headless">
+    <GROUP id="{9EEB6A5D-7474-4E05-47ED-5B8580B369F1}" name="Lib">
+      <FILE id="tINJwP" name="voclib.cpp" compile="1" resource="0" file="Source/Lib/voclib.cpp"/>
+      <FILE id="f7OaDg" name="voclib.h" compile="0" resource="0" file="Source/Lib/voclib.h"/>
+    </GROUP>
+    <GROUP id="{179C185F-94DD-2B92-0ADC-0707DD2D2177}" name="Source">
+      <FILE id="ESfRfS" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="Z6vBQ4" name="Vocoder.cpp" compile="1" resource="0" file="Source/Vocoder.cpp"/>
+      <FILE id="k2a6pA" name="Vocoder.h" compile="0" resource="0" file="Source/Vocoder.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <EMSCRIPTEN_MAKE targetFolder="Builds/Emscripten" extraCompilerFlags="-std=c++17&#10;-sUSE_PTHREADS=1 -sDISABLE_EXCEPTION_CATCHING=0"
+                     extraLinkerFlags="-o vocoder.html">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="VocoderJUCE_Headless"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="VocoderJUCE_Headless"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_core" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_events" path="../../../cpp/lib/juce_emscripten/modules"/>
+      </MODULEPATHS>
+    </EMSCRIPTEN_MAKE>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="VocoderJUCE_Headless"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="VocoderJUCE_Headless"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_core" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_events" path="../../../cpp/lib/juce_emscripten/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="VocoderJUCE_Headless" headerPath="G:\Dev\web\emscripten\emsdk\upstream\emscripten\system\include\emscripten"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="VocoderJUCE_Headless"
+                       headerPath="G:\Dev\web\emscripten\emsdk\upstream\emscripten\system\include\emscripten"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_core" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../cpp/lib/juce_emscripten/modules"/>
+        <MODULEPATH id="juce_events" path="../../../cpp/lib/juce_emscripten/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+</JUCERPROJECT>
