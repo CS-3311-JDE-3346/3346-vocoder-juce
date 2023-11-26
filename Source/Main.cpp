@@ -11,19 +11,23 @@
 #include "Tests/TestsHeader.h"
 
 #ifdef EMSCRIPTEN
-#include <emscripten.h>
+#include <emscripten/emscripten.h>
+#include <emscripten/bind.h>
 #endif
 
 void startupMsg();
 void loop(const juce::ArgumentList& args);
 
 //==============================================================================
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 int main (int argc, char* argv[])
 {
     juce::ConsoleApplication app;
     app.addHelpCommand("--help|-h", "Usage:", true);
     app.addVersionCommand("--version|-v", "Vocoder (Headless) v0.01");
-    app.addCommand({
+    app.addDefaultCommand({
         "--tests|-t",
         "--tests | -t",
         "Run tests",
@@ -33,14 +37,14 @@ int main (int argc, char* argv[])
             Tests::RunAllTests();
         }
     });
-    app.addDefaultCommand({
-        "--runAuto|-t",
-        "--tests | -t",
-        "Run tests",
-        "Run unit-like tests",
+    app.addCommand({
+        "--run|-r",
+        "--run | -r",
+        "Run vocoder",
+        "Voclib will produce an output to Assets/out",
         [](const auto& args)
         {
-            Tests::RunAllTests();
+            std::cout << "Not implemented yet" << std::endl;
         }
     });
     app.addCommand({
@@ -55,6 +59,39 @@ int main (int argc, char* argv[])
     });
     return app.findAndRunCommand(argc, argv);
 }
+
+int main_em(int command)
+{
+    std::cout << "Mode: " << command << std::endl;
+    switch (command)
+    {
+    case 0:
+    {
+        char* argv[] = { "-v" };
+        main(1, { argv });
+    }
+        break;
+    case 1:
+    {
+        char* argv[] = { "-r" };
+        main(1, { argv });
+    }
+        break;
+    default:
+        main(0, nullptr);
+    }
+}
+
+#ifdef EMSCRIPTEN
+//EMSCRIPTEN_BINDINGS(vocoder)
+//{
+//    emscripten::function("main", &main, emscripten::allow_raw_pointers());
+//}
+EMSCRIPTEN_BINDINGS(vocoder)
+{
+    emscripten::function("main_em", &main_em);
+}
+#endif
 
 void startupMsg() {
     std::cout << "Initializing vocoder" << std::endl;
