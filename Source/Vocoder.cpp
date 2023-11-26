@@ -22,6 +22,7 @@ Vocoder::Vocoder()
 void Vocoder::loadModulatorSampleFile(const juce::String& filepath)
 {
     juce::File file{ filepath };
+    std::cout << "Filepath generated: " << file.getFullPathName() << std::endl;
     if (file != juce::File{}) // file is not invalid
     {
         juce::AudioFormatReader* reader = formatManager.createReaderFor(file);
@@ -36,6 +37,7 @@ void Vocoder::loadModulatorSampleFile(const juce::String& filepath)
 void Vocoder::loadCarrierSampleFile(const juce::String& filepath)
 {
     juce::File file{ filepath };
+    std::cout << "Filepath generated: " << file.getFullPathName() << std::endl;
     if (file != juce::File{}) // file is not invalid
     {
         juce::AudioFormatReader* reader = formatManager.createReaderFor(file);

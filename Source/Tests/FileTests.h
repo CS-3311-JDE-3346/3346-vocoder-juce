@@ -11,8 +11,13 @@
 #pragma once
 #include "../Vocoder.h"
 
-bool Tests_Run();
+namespace Tests_Files
+{
 
-bool Test_ModulatorLoad(const Vocoder& v);
-bool Test_CarrierLoad(const Vocoder& v);
-bool Test_FileSave(const Vocoder& v);
+    void Tests_Run();
+
+    bool Test_ModulatorLoad(Vocoder& v);
+    bool Test_CarrierLoad(Vocoder& v);
+    bool Test_FileSave(Vocoder& v);
+
+}

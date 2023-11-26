@@ -15,9 +15,10 @@
 
 class Vocoder
 {
-    juce::String defaultInputPath = "../Assets/";
-    juce::String defaultOutputPath = "../Assets/";
-    
+public:
+    juce::String defaultInputPath = "./Assets/";
+    juce::String defaultOutputPath = "./Assets/out";
+private:
     juce::String defaultModulatorSample = "modulator_f32_mono.wav";
     juce::String defaultCarrierSample_Sine = "sine_440hz_f32_mono.wav";
     juce::String defaultCarrierSample_Saw = "saw_440hz_f32_mono.wav";
@@ -39,7 +40,7 @@ public:
     std::unique_ptr<juce::AudioFormatReaderSource> readerSourceCarrier;
     std::unique_ptr<juce::AudioFormatReaderSource> readerSourceModulator;
     void loadModulatorSampleFile(const juce::String& filepath);
-    void loadCarrierSampleFile(const juce::String& filepath)
+    void loadCarrierSampleFile(const juce::String& filepath);
 };
 
 namespace NoiseGenerator

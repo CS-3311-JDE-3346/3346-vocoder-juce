@@ -10,3 +10,11 @@
 
 #pragma once
 #include "FileTests.h"
+
+namespace Tests
+{
+    void RunAllTests()
+    {
+        Tests_Files::Tests_Run();
+    }
+}

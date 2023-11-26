@@ -28,7 +28,10 @@ int main (int argc, char* argv[])
         "--tests | -t",
         "Run tests",
         "Run unit-like tests",
-        [](const auto& args) {}
+        [](const auto& args)
+        {
+            Tests::RunAllTests();
+        }
     });
     app.addDefaultCommand({"-c", "-c", "Runs the vocoder in continuous mode (default)", "Runs the vocoder in continuous mode (default)", [](const auto& args) { loop(args); }
 });
