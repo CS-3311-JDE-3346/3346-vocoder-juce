@@ -2,6 +2,9 @@
 
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="VocoderJUCE_Headless\Tests">
+      <UniqueIdentifier>{D5F98829-462F-FB93-FDBF-E80F80A98260}</UniqueIdentifier>
+    </Filter>
     <Filter Include="VocoderJUCE_Headless\Lib">
       <UniqueIdentifier>{6E718BE9-88EA-DDD8-5E25-058EA634BFFC}</UniqueIdentifier>
     </Filter>
@@ -187,6 +190,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Tests\FileTests.cpp">
+      <Filter>VocoderJUCE_Headless\Tests</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Lib\voclib.cpp">
       <Filter>VocoderJUCE_Headless\Lib</Filter>
     </ClCompile>
@@ -903,6 +909,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\Tests\FileTests.h">
+      <Filter>VocoderJUCE_Headless\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Tests\TestsHeader.h">
+      <Filter>VocoderJUCE_Headless\Tests</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Lib\voclib.h">
       <Filter>VocoderJUCE_Headless\Lib</Filter>
     </ClInclude>

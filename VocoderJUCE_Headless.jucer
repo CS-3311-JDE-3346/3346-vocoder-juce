@@ -4,6 +4,11 @@
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
               jucerFormatVersion="1">
   <MAINGROUP id="DCPjHw" name="VocoderJUCE_Headless">
+    <GROUP id="{9CBB8E2B-DFA4-6D38-C9F2-752041031864}" name="Tests">
+      <FILE id="o4bKK2" name="FileTests.cpp" compile="1" resource="0" file="Source/Tests/FileTests.cpp"/>
+      <FILE id="EF4NkD" name="FileTests.h" compile="0" resource="0" file="Source/Tests/FileTests.h"/>
+      <FILE id="qZrnHc" name="TestsHeader.h" compile="0" resource="0" file="Source/Tests/TestsHeader.h"/>
+    </GROUP>
     <GROUP id="{9EEB6A5D-7474-4E05-47ED-5B8580B369F1}" name="Lib">
       <FILE id="tINJwP" name="voclib.cpp" compile="1" resource="0" file="Source/Lib/voclib.cpp"/>
       <FILE id="f7OaDg" name="voclib.h" compile="0" resource="0" file="Source/Lib/voclib.h"/>
@@ -21,7 +26,8 @@
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
-  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_USE_MP3AUDIOFORMAT="1"
+               JUCE_USE_LAME_AUDIO_FORMAT="1"/>
   <EXPORTFORMATS>
     <EMSCRIPTEN_MAKE targetFolder="Builds/Emscripten" extraCompilerFlags="-std=c++17&#10;-sUSE_PTHREADS=1 -sDISABLE_EXCEPTION_CATCHING=0"
                      extraLinkerFlags="-o vocoder.html">

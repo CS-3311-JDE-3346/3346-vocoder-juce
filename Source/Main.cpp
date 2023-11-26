@@ -8,6 +8,7 @@
 
 #include <JuceHeader.h>
 #include "Vocoder.h"
+#include "Tests/TestsHeader.h"
 
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
@@ -22,6 +23,13 @@ int main (int argc, char* argv[])
     juce::ConsoleApplication app;
     app.addHelpCommand("--help|-h", "Usage:", true);
     app.addVersionCommand("--version|-v", "Vocoder (Headless) v0.01");
+    app.addCommand({
+        "--tests|-t",
+        "--tests | -t",
+        "Run tests",
+        "Run unit-like tests",
+        [](const auto& args) {}
+    });
     app.addDefaultCommand({"-c", "-c", "Runs the vocoder in continuous mode (default)", "Runs the vocoder in continuous mode (default)", [](const auto& args) { loop(args); }
 });
     return app.findAndRunCommand(argc, argv);
@@ -37,8 +45,13 @@ void startupMsg() {
 void loop(const juce::ArgumentList& args)
 {
     startupMsg();
-    //while (true)
-    //{
+    // avoid infinite loop if executing as wasm
+    bool wasm = false;
+#ifdef EMSCRIPTEN
+    wasm = true;
+#endif
+    while (!wasm)
+    {
 
-    //}
+    }
 }
