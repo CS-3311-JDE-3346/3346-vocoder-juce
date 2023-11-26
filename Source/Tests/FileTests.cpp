@@ -19,15 +19,15 @@ namespace Tests_Files
         std::cout << "=================" << std::endl;
         std::cout << "Running FileTests" << std::endl;
         std::cout << "=================" << std::endl;
-        std::cout << "Running Test_ModulatorLoad: " << Test_ModulatorLoad(v) << std::endl;
-        std::cout << "Running Test_CarrierLoad: " << Test_CarrierLoad(v) << std::endl;
-        //std::cout << "Running Test_FileSave: " << Test_FileSave(v) << std::endl;
+        std::cout << "Running Test_ModulatorLoad:\n" << (Test_ModulatorLoad(v) ? ">>> Passed" : ">>> Failed") << "\n---" << std::endl;
+        std::cout << "Running Test_CarrierLoad:\n" << (Test_CarrierLoad(v) ? ">>> Passed" : ">>> Failed") << "\n---" << std::endl;
+        //std::cout << "Running Test_FileSave: " << (Test_FileSave(v) ? ">>> Passed" : ">>> Failed") << "\n---" << std::endl;
         std::cout << std::endl;
     }
 
     bool Test_ModulatorLoad(Vocoder& v)
     {
-        std::cout << "\nModulator sample filepaths:" << std::endl;
+        std::cout << "Modulator sample filepaths:" << std::endl;
         for (juce::String i : v.modulatorSamples)
         {
             std::cout << v.defaultInputPath + i << ' ';
@@ -47,7 +47,7 @@ namespace Tests_Files
 
     bool Test_CarrierLoad(Vocoder& v)
     {
-        std::cout << "\nCarrier sample filepaths:" << std::endl;
+        std::cout << "Carrier sample filepaths:" << std::endl;
         for (juce::String i : v.carrierSamples)
         {
             std::cout << v.defaultInputPath + i << ' ';
