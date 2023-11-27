@@ -69,53 +69,58 @@ namespace Tests_Files
 
     bool Test_FileSave(Vocoder& v)
     {
-//#ifdef EMSCRIPTEN
-//        // MOUNT FILESYSTEM
-//        EM_ASM(
-//            // Make a directory other than '/'
-//            FS.mkdir('/disk');
-//            // Then mount with IDBFS type
-//            FS.mount(IDBFS, {}, '/disk');
-//            // default MEMFS
-//            //FS.mount(MEMFS, {}, '/disk');
-//
-//            // Then sync
-//            FS.syncfs(true, function(err) {
-//                // Error
-//            });
-//        );
-//#endif
-        //char* openMode = "wb";
-        ////char* openMode = "rb";
-        //char* filePath = "./Assets/out/output.wav";
-        ////char* filePath = "./Assets/modulator_f32_mono.wav";
-        //std::cout << "openMode = " << openMode << std::endl;
-        //FILE* pFile;
 
-        //#if defined(_MSC_VER) && _MSC_VER >= 1400
-        //    if (fopen_s(&pFile, filePath, openMode) != 0) {
-        //        std::cout << "MSC, fopen failed" << std::endl;
-        //        return false;
-        //    }
-        //#else
-        //pFile = fopen(filePath, openMode);
-        //if (pFile == NULL) {
-        //    std::cout << "fopen failed" << std::endl;
-        //    return false;
-        //}
+        //#ifdef EMSCRIPTEN
+        //// MOUNT FILESYSTEM
+        //EM_ASM(
+        //    // Make a directory other than '/'
+        //    FS.mkdir('/disk');
+        //    // Then mount with IDBFS type
+        //    FS.mount(IDBFS, {}, '/disk');
+        //    // default MEMFS
+        //    //FS.mount(MEMFS, {}, '/disk');
+
+        //    // Then sync
+        //    FS.syncfs(true, function(err) {
+        //        // Error
+        //    });
+        //);
         //#endif
 
-        std::string filePath = "./Assets/out/testOut.wav";
+        // * C way
+        char* openMode = "wb";
+        //char* openMode = "rb";
+        char* filePath = "./Assets/out/testOutC.wav";
+        //char* filePath = "./Assets/modulator_f32_mono.wav";
+        std::cout << "openMode = " << openMode << std::endl;
+        FILE* pFile;
 
-        std::ofstream fileOut{ filePath, std::ios::out | std::ios::binary };
+        #if defined(_MSC_VER) && _MSC_VER >= 1400
+            if (fopen_s(&pFile, filePath, openMode) != 0) {
+                std::cout << "MSC, fopen failed" << std::endl;
+                return false;
+            }
+        #else
+        pFile = fopen(filePath, openMode);
+        if (pFile == NULL) {
+            std::cout << "fopen failed" << std::endl;
+            return false;
+        }
+        #endif
 
+        // * C++ way
+        std::string filePath2 = "./Assets/out/testOutCpp.wav";
+
+        std::ofstream fileOut{ filePath2, std::ios::out | std::ios::binary };
+
+        // mainly for opening files
         /*if (!fileOut.is_open()) {
             std::cerr << "Error opening file at " << filePath;
             perror(" ");
         }*/
 
-        char* blah = "data";
-        fileOut.write(blah, sizeof(blah));
+        char* blah = "0101";
+        fileOut.write(blah, sizeof(char) * strlen(blah));
 
         // failbit can be set by getline if it cannot extract data
         // this can often happen if the last char in a file is a lin delimiter

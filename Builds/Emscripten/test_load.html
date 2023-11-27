@@ -1224,9 +1224,19 @@ canvas.emscripten { border: 0px none; background-color: black; }
 
     <div><b>Please only use mono-channel .wav files</b></div>
     <label for="modulator">Modulator</label>
-    <input type="file" id="modulator" accept=".wav">
+    <input disabled type="file" id="modulator" accept=".wav">
+    <label for="modulatorSelect">Modulator select (0 = use uploaded file):</label>
+    <input type="range" id="modulatorSelect" value="1" name="vol" min="0" max="1">
+
     <label for="carrier">Carrier</label>
-    <input type="file" id="carrier" accept=".wav">
+    <input disabled type="file" id="carrier" accept=".wav">
+    <label for="carrierSelect">Carrier select (0 = use uploaded file):</label>
+    <input type="range" id="carrierSelect" value="1" name="vol" min="0" max="4">
+
+    <button id="runVocoder" disabled>Run vocoder</button>
+
+    <button id="downloadOutput" disabled>Download output</button>
+
 
     <script type='text/javascript'>
       var statusElement = document.getElementById('status');
@@ -1299,7 +1309,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
         };
       };
     </script>
-    <script async type="text/javascript" src="vocoder.js"></script>
-    <script async type="text/javascript" src="fileio.js"></script>
+    <script defer type="text/javascript" src="vocoder.js"></script>
+    <script defer type="text/javascript" src="fileio.js"></script>
   </body>
 </html>

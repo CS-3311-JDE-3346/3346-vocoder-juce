@@ -13,7 +13,7 @@
 
 namespace Tests
 {
-    void RunAllTests()
+    void runAllTests()
     {
         Tests_Files::Tests_Run();
     }

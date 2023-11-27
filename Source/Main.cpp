@@ -19,6 +19,7 @@
 
 void startupMsg();
 void loop(const juce::ArgumentList& args);
+void runVocoder();
 
 //==============================================================================
 #ifdef EMSCRIPTEN
@@ -26,23 +27,6 @@ EMSCRIPTEN_KEEPALIVE
 #endif
 int main (int argc, char* argv[])
 {
-//#ifdef EMSCRIPTEN
-//    // MOUNT FILESYSTEM
-//    EM_ASM(
-//        // Make a directory other than '/'
-//        FS.mkdir('/disk');
-//    // Then mount with IDBFS type
-//    //FS.mount(IDBFS, {}, '/disk');
-//    // default MEMFS
-//    FS.mount(MEMFS, {}, '/disk');
-//
-//    // Then sync
-//    FS.syncfs(true, function(err) {
-//        // Error
-//    });
-//    );
-//#endif
-
     juce::ConsoleApplication app;
     app.addHelpCommand("--help|-h", "Usage:", true);
     app.addVersionCommand("--version|-v", "Vocoder (Headless) v0.01");
@@ -53,7 +37,7 @@ int main (int argc, char* argv[])
         "Run unit-like tests",
         [](const auto& args)
         {
-            Tests::RunAllTests();
+            Tests::runAllTests();
         }
     });
     app.addCommand({
@@ -63,22 +47,7 @@ int main (int argc, char* argv[])
         "Voclib will produce an output to Assets/out",
         [](const auto& args)
         {
-            //std::cout << "Not implemented yet" << std::endl;
-            std::string carrierPath = (Vocoder::defaultInputPath + Vocoder::defaultCarrierSample_Saw).toStdString();
-            std::string modulatorPath = (Vocoder::defaultInputPath + Vocoder::defaultModulatorSample).toStdString();
-            std::string outputPath = (Vocoder::defaultOutputPath + "output.wav").toStdString();
-            std::vector<const char*> argvec{"args", "-c", carrierPath.c_str(), "-m", modulatorPath.c_str(), "-o", outputPath.c_str()};
-            
-            std::cout << "voclib args:" << std::endl;
-            for (const char* i : argvec)
-            {
-                std::cout << i << ' ';
-            }
-            std::cout << std::endl;
-
-            const char** argv = argvec.data();
-            auto argc = argvec.size();
-            main_Shell(argc, argv);
+            runVocoder();
         }
     });
     app.addCommand({
@@ -94,16 +63,24 @@ int main (int argc, char* argv[])
     return app.findAndRunCommand(argc, argv);
 }
 
-void main_em(int command)
+void runVocoder()
 {
-    switch (command)
+    Vocoder vocoder;
+    std::string carrierPath = (Vocoder::defaultInputPath + vocoder.carrierSamples[vocoder.getCarrierIndex()]).toStdString();
+    std::string modulatorPath = (Vocoder::defaultInputPath + vocoder.modulatorSamples[vocoder.getModulatorIndex()]).toStdString();
+    std::string outputPath = (Vocoder::defaultOutputPath + "output.wav").toStdString();
+    std::vector<const char*> argvec{ "args", "-c", carrierPath.c_str(), "-m", modulatorPath.c_str(), "-o", outputPath.c_str() };
+
+    std::cout << "voclib args:" << std::endl;
+    for (const char* i : argvec)
     {
-    case 0:
-        //main_Shell();
-        break;
-    default:
-        std::cout << "Invalid command." << std::endl;
+        std::cout << i << ' ';
     }
+    std::cout << std::endl;
+
+    const char** argv = argvec.data();
+    auto argc = argvec.size();
+    main_Shell(argc, argv);
 }
 
 #ifdef EMSCRIPTEN
@@ -111,11 +88,12 @@ void main_em(int command)
 //{
 //    emscripten::function("main", &main, emscripten::allow_raw_pointers());
 //}
-EMSCRIPTEN_BINDINGS(vocoder)
+EMSCRIPTEN_BINDINGS(main)
 {
-    emscripten::function("main_em", &main_em);
+    emscripten::function("runVocoder", &runVocoder);
 }
 #endif
+
 
 void startupMsg() {
     std::cout << "Initializing vocoder" << std::endl;
