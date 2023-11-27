@@ -11,6 +11,7 @@
 #include "Vocoder.h"
 #include <iostream>
 #include <JuceHeader.h>
+#include "Lib/shell/vocshell.h"
 
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
@@ -92,7 +93,7 @@ int Vocoder::getCarrierIndex() const
     return this->carrierIndex;
 }
 
-bool Vocoder::setModulatorFilename(const juce::String& filename)
+bool Vocoder::setModulatorFilename(const std::string& filename)
 {
     if (filename.length() > 0)
     {
@@ -102,7 +103,7 @@ bool Vocoder::setModulatorFilename(const juce::String& filename)
     return false;
 }
 
-bool Vocoder::setCarrierFilename(const juce::String& filename)
+bool Vocoder::setCarrierFilename(const std::string& filename)
 {
     if (filename.length() > 0)
     {
@@ -112,14 +113,29 @@ bool Vocoder::setCarrierFilename(const juce::String& filename)
     return false;
 }
 
-class Blah
+bool Vocoder::run()
 {
-    int x;
-public:
-    Blah(int x) {
-        this->x = x;
+    std::string carrierPath = (Vocoder::defaultInputPath + this->carrierSamples[this->getCarrierIndex()]).toStdString();
+    std::string modulatorPath = (Vocoder::defaultInputPath + this->modulatorSamples[this->getModulatorIndex()]).toStdString();
+    std::string outputPath = (Vocoder::defaultOutputPath + "output.wav").toStdString();
+    std::vector<const char*> argvec{ "args", "-c", carrierPath.c_str(), "-m", modulatorPath.c_str(), "-o", outputPath.c_str() };
+
+    std::cout << "voclib args:" << std::endl;
+    for (const char* i : argvec)
+    {
+        std::cout << i << ' ';
     }
-};
+    std::cout << std::endl;
+
+    const char** argv = argvec.data();
+    auto argc = argvec.size();
+    if (main_Shell(argc, argv) == 0)
+    {
+        return true;
+    }
+    return false;
+}
+
 
 #ifdef EMSCRIPTEN
 EMSCRIPTEN_KEEPALIVE
@@ -129,6 +145,7 @@ EMSCRIPTEN_BINDINGS(vocoder)
         .constructor<>()
         .function("setModulatorFilename", &Vocoder::setModulatorFilename)
         .function("setCarrierFilename", &Vocoder::setCarrierFilename)
+        .function("run", &Vocoder::run)
 
         .property("carrierIndex", &Vocoder::getCarrierIndex, &Vocoder::setCarrierIndex)
         .property("modulatorIndex", &Vocoder::getModulatorIndex, &Vocoder::setModulatorIndex)

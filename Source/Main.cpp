@@ -19,12 +19,11 @@
 
 void startupMsg();
 void loop(const juce::ArgumentList& args);
-void runVocoder();
 
 //==============================================================================
-#ifdef EMSCRIPTEN
-EMSCRIPTEN_KEEPALIVE
-#endif
+//#ifdef EMSCRIPTEN
+//EMSCRIPTEN_KEEPALIVE
+//#endif
 int main (int argc, char* argv[])
 {
     juce::ConsoleApplication app;
@@ -43,11 +42,14 @@ int main (int argc, char* argv[])
     app.addCommand({
         "--run|-r",
         "--run | -r",
-        "Run vocoder",
-        "Voclib will produce an output to Assets/out",
+        "Run vocoder (debug)",
+        "Voclib will produce an output to Assets/out using default settings",
         [](const auto& args)
         {
-            runVocoder();
+            Vocoder vocoder;
+            vocoder.setCarrierIndex(3);
+            vocoder.setModulatorIndex(1);
+            vocoder.run();
         }
     });
     app.addCommand({
@@ -63,35 +65,11 @@ int main (int argc, char* argv[])
     return app.findAndRunCommand(argc, argv);
 }
 
-void runVocoder()
-{
-    Vocoder vocoder;
-    std::string carrierPath = (Vocoder::defaultInputPath + vocoder.carrierSamples[vocoder.getCarrierIndex()]).toStdString();
-    std::string modulatorPath = (Vocoder::defaultInputPath + vocoder.modulatorSamples[vocoder.getModulatorIndex()]).toStdString();
-    std::string outputPath = (Vocoder::defaultOutputPath + "output.wav").toStdString();
-    std::vector<const char*> argvec{ "args", "-c", carrierPath.c_str(), "-m", modulatorPath.c_str(), "-o", outputPath.c_str() };
-
-    std::cout << "voclib args:" << std::endl;
-    for (const char* i : argvec)
-    {
-        std::cout << i << ' ';
-    }
-    std::cout << std::endl;
-
-    const char** argv = argvec.data();
-    auto argc = argvec.size();
-    main_Shell(argc, argv);
-}
-
 #ifdef EMSCRIPTEN
 //EMSCRIPTEN_BINDINGS(vocoder)
 //{
 //    emscripten::function("main", &main, emscripten::allow_raw_pointers());
 //}
-EMSCRIPTEN_BINDINGS(main)
-{
-    emscripten::function("runVocoder", &runVocoder);
-}
 #endif
 
 

@@ -51,8 +51,11 @@ public:
     bool setCarrierIndex(int index);
     int getModulatorIndex() const;
     int getCarrierIndex() const;
-    bool setModulatorFilename(const juce::String& filename);
-    bool setCarrierFilename(const juce::String& filename);
+    // using std::string for js-exposed functions since otherwise I would have to somehow do a type conversion from JS string to juce::String
+    // which would probably involve somehow exporting juce::String and I would prefer to just stick to built-in types
+    bool setModulatorFilename(const std::string& filename);
+    bool setCarrierFilename(const std::string& filename);
+    bool run();
 };
 
 namespace NoiseGenerator

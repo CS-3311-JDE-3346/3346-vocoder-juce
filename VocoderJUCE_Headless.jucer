@@ -35,7 +35,7 @@
                JUCE_USE_LAME_AUDIO_FORMAT="1"/>
   <EXPORTFORMATS>
     <EMSCRIPTEN_MAKE targetFolder="Builds/Emscripten" extraCompilerFlags="-std=c++17&#10;-sUSE_PTHREADS=1 -sDISABLE_EXCEPTION_CATCHING=0"
-                     extraLinkerFlags="-o vocoder.html&#10;--preload-file ../../Assets&#10;-lembind&#10;-s 'EXPORTED_RUNTIME_METHODS=[&quot;callMain&quot;, &quot;FS&quot;]'&#10;-s ALLOW_MEMORY_GROWTH=1&#10;-s TOTAL_MEMORY=64MB &#10;-s TOTAL_STACK=32MB">
+                     extraLinkerFlags="-o vocoder.html&#10;--preload-file ../../Assets&#10;-lembind&#10;-s 'EXPORTED_RUNTIME_METHODS=[&quot;callMain&quot;, &quot;FS&quot;, &quot;stringToNewUTF8&quot;]'&#10;-s ALLOW_MEMORY_GROWTH=1&#10;-s TOTAL_MEMORY=64MB &#10;-s TOTAL_STACK=32MB">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="VocoderJUCE_Headless"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="VocoderJUCE_Headless"/>

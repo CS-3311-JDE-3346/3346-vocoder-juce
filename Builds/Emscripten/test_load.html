@@ -1231,7 +1231,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
     <label for="carrier">Carrier</label>
     <input disabled type="file" id="carrier" accept=".wav">
     <label for="carrierSelect">Carrier select (0 = use uploaded file):</label>
-    <input type="range" id="carrierSelect" value="1" name="vol" min="0" max="4">
+    <input type="range" id="carrierSelect" value="2" name="vol" min="0" max="4">
 
     <button id="runVocoder" disabled>Run vocoder</button>
 
@@ -1309,7 +1309,7 @@ canvas.emscripten { border: 0px none; background-color: black; }
         };
       };
     </script>
-    <script defer type="text/javascript" src="vocoder.js"></script>
     <script defer type="text/javascript" src="fileio.js"></script>
+    <script defer type="text/javascript" src="vocoder.js"></script>
   </body>
 </html>
