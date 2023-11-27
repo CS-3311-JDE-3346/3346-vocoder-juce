@@ -11,6 +11,10 @@
 #pragma once
 #include "../Vocoder.h"
 
+#ifdef EMSCRIPTEN
+#include <emscripten/emscripten.h>
+#endif
+
 namespace Tests_Files
 {
 

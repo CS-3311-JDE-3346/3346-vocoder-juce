@@ -3,6 +3,8 @@
 //
 // David Reid - mackron@gmail.com
 
+#include <iostream>
+
 /*
 DEPRECATED APIS
 ===============
@@ -1172,14 +1174,18 @@ static drwav_bool32 drwav__read_fmt(drwav_read_proc onRead, drwav_seek_proc onSe
 #ifndef DR_WAV_NO_STDIO
 FILE* drwav_fopen(const char* filePath, const char* openMode)
 {
+    std::cout << "openMode =" << openMode << std::endl;
     FILE* pFile;
+
 #if defined(_MSC_VER) && _MSC_VER >= 1400
     if (fopen_s(&pFile, filePath, openMode) != 0) {
+        std::cout << "MSC, fopen failed" << std::endl;
         return DRWAV_FALSE;
     }
 #else
     pFile = fopen(filePath, openMode);
     if (pFile == NULL) {
+        std::cout << "fopen failed" << std::endl;
         return DRWAV_FALSE;
     }
 #endif
@@ -1264,11 +1270,13 @@ drwav* drwav_open_file_write__internal(const char* filename, const drwav_data_fo
 {
     FILE* pFile = drwav_fopen(filename, "wb");
     if (pFile == NULL) {
+        std::cout << "drwav_fopen failed" << std::endl;
         return DRWAV_FALSE;
     }
 
     drwav* pWav = drwav_open_write__internal(pFormat, totalSampleCount, isSequential, drwav__on_write_stdio, drwav__on_seek_stdio, (void*)pFile);
     if (pWav == NULL) {
+        std::cout << "drwav_open_write__internal failed" << std::endl;
         fclose(pFile);
         return NULL;
     }

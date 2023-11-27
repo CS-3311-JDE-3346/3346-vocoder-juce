@@ -123,6 +123,7 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
         if (!check) throw msg + new Error().stack;
       }
 Module['FS_createPath']("/", "Assets", true, true);
+Module['FS_createPath']("/Assets", "out", true, true);
 
       /** @constructor */
       function DataRequest(start, end, audio) {
@@ -190,7 +191,7 @@ Module['FS_createPath']("/", "Assets", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/Assets/modulator_f32_mono.wav", "start": 0, "end": 629536, "audio": 1}, {"filename": "/Assets/saw_440hz_f32_mono.wav", "start": 629536, "end": 1688016, "audio": 1}, {"filename": "/Assets/sine_440hz_f32_mono.wav", "start": 1688016, "end": 2746496, "audio": 1}, {"filename": "/Assets/square_440hz_f32_mono.wav", "start": 2746496, "end": 3804976, "audio": 1}, {"filename": "/Assets/triangle_440hz_f32_mono.wav", "start": 3804976, "end": 4863456, "audio": 1}], "remote_package_size": 4863456});
+    loadPackage({"files": [{"filename": "/Assets/modulator_f32_mono.wav", "start": 0, "end": 629536, "audio": 1}, {"filename": "/Assets/out/.persist", "start": 629536, "end": 629536}, {"filename": "/Assets/saw_440hz_f32_mono.wav", "start": 629536, "end": 1688016, "audio": 1}, {"filename": "/Assets/sine_440hz_f32_mono.wav", "start": 1688016, "end": 2746496, "audio": 1}, {"filename": "/Assets/square_440hz_f32_mono.wav", "start": 2746496, "end": 3804976, "audio": 1}, {"filename": "/Assets/triangle_440hz_f32_mono.wav", "start": 3804976, "end": 4863456, "audio": 1}], "remote_package_size": 4863456});
 
   })();
 
@@ -6279,6 +6280,7 @@ function dbg(text) {
 
 
 
+
   var FS_unlink = (path) => FS.unlink(path);
 
   var FSNode = /** @constructor */ function(parent, name, mode, rdev) {
@@ -6578,6 +6580,17 @@ function invoke_vii(index,a1,a2) {
   }
 }
 
+function invoke_iiii(index,a1,a2,a3) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
 function invoke_vi(index,a1) {
   var sp = stackSave();
   try {
@@ -6604,17 +6617,6 @@ function invoke_v(index) {
   var sp = stackSave();
   try {
     getWasmTableEntry(index)();
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iiii(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    return getWasmTableEntry(index)(a1,a2,a3);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -6897,6 +6899,7 @@ Module['FS_createLazyFile'] = FS.createLazyFile;
 Module['FS_createDevice'] = FS.createDevice;
 Module['callMain'] = callMain;
 Module['FS_createPreloadedFile'] = FS.createPreloadedFile;
+Module['FS'] = FS;
 Module['FS_createDataFile'] = FS.createDataFile;
 Module['FS_unlink'] = FS.unlink;
 var missingLibrarySymbols = [
@@ -7194,7 +7197,6 @@ var unexportedSymbols = [
   'FS_getMode',
   'FS_stdin_getChar_buffer',
   'FS_stdin_getChar',
-  'FS',
   'MEMFS',
   'TTY',
   'PIPEFS',

@@ -21,12 +21,32 @@ void startupMsg();
 void loop(const juce::ArgumentList& args);
 
 //==============================================================================
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 int main (int argc, char* argv[])
 {
+//#ifdef EMSCRIPTEN
+//    // MOUNT FILESYSTEM
+//    EM_ASM(
+//        // Make a directory other than '/'
+//        FS.mkdir('/disk');
+//    // Then mount with IDBFS type
+//    //FS.mount(IDBFS, {}, '/disk');
+//    // default MEMFS
+//    FS.mount(MEMFS, {}, '/disk');
+//
+//    // Then sync
+//    FS.syncfs(true, function(err) {
+//        // Error
+//    });
+//    );
+//#endif
+
     juce::ConsoleApplication app;
     app.addHelpCommand("--help|-h", "Usage:", true);
     app.addVersionCommand("--version|-v", "Vocoder (Headless) v0.01");
-    app.addCommand({
+    app.addDefaultCommand({
         "--tests|-t",
         "--tests | -t",
         "Run tests",
@@ -36,7 +56,7 @@ int main (int argc, char* argv[])
             Tests::RunAllTests();
         }
     });
-    app.addDefaultCommand({
+    app.addCommand({
         "--run|-r",
         "--run | -r",
         "Run vocoder",
