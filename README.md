@@ -38,3 +38,8 @@ Follow the Linux setup instructions. If using WSL, the same instructions apply.
 ## Compiling with Emscripten
 
 - todo
+
+## Using
+
+C++
+Juce Framework
