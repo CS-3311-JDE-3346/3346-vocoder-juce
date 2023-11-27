@@ -12,7 +12,13 @@
 #include <iostream>
 #include <JuceHeader.h>
 
-
+juce::String Vocoder::defaultInputPath = "./Assets/";
+juce::String Vocoder::defaultOutputPath = "./Assets/out/";
+juce::String Vocoder::defaultModulatorSample = "modulator_f32_mono.wav";
+juce::String Vocoder::defaultCarrierSample_Sine = "sine_440hz_f32_mono.wav";
+juce::String Vocoder::defaultCarrierSample_Saw = "saw_440hz_f32_mono.wav";
+juce::String Vocoder::defaultCarrierSample_Square = "square_440hz_f32_mono.wav";
+juce::String Vocoder::defaultCarrierSample_Triangle = "triangle_440hz_f32_mono.wav";
 
 Vocoder::Vocoder()
 {

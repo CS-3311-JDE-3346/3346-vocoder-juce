@@ -924,6 +924,9 @@
     <ClInclude Include="..\..\Source\Lib\shell\dr_wav.h">
       <Filter>VocoderJUCE_Headless\Lib\shell</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Lib\shell\vocshell.h">
+      <Filter>VocoderJUCE_Headless\Lib\shell</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Lib\voclib.h">
       <Filter>VocoderJUCE_Headless\Lib</Filter>
     </ClInclude>

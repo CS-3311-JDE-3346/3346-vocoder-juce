@@ -45,7 +45,7 @@ ifeq ($(CONFIG),Debug)
 
   JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 -std=c++17 -sUSE_PTHREADS=1 -sDISABLE_EXCEPTION_CATCHING=0 $(CFLAGS)
   JUCE_CXXFLAGS += $(JUCE_CFLAGS) -std=c++17 $(CXXFLAGS)
-  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -fvisibility=hidden -o vocoder.html --preload-file ../../Assets -lembind -lrt -ldl -lpthread $(LDFLAGS)
+  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -fvisibility=hidden -o vocoder.html --preload-file ../../Assets -lembind -s 'EXPORTED_RUNTIME_METHODS=["callMain"]' -s ALLOW_MEMORY_GROWTH=1 -s TOTAL_MEMORY=64MB  -s TOTAL_STACK=32MB -lrt -ldl -lpthread $(LDFLAGS)
 
   CLEANCMD = rm -rf $(JUCE_OUTDIR)/$(TARGET) $(JUCE_OBJDIR)
 endif
@@ -66,7 +66,7 @@ ifeq ($(CONFIG),Release)
 
   JUCE_CFLAGS += $(JUCE_CPPFLAGS) $(TARGET_ARCH) -O3 -std=c++17 -sUSE_PTHREADS=1 -sDISABLE_EXCEPTION_CATCHING=0 $(CFLAGS)
   JUCE_CXXFLAGS += $(JUCE_CFLAGS) -std=c++17 $(CXXFLAGS)
-  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -fvisibility=hidden -o vocoder.html --preload-file ../../Assets -lembind -lrt -ldl -lpthread $(LDFLAGS)
+  JUCE_LDFLAGS += $(TARGET_ARCH) -L$(JUCE_BINDIR) -L$(JUCE_LIBDIR) -fvisibility=hidden -o vocoder.html --preload-file ../../Assets -lembind -s 'EXPORTED_RUNTIME_METHODS=["callMain"]' -s ALLOW_MEMORY_GROWTH=1 -s TOTAL_MEMORY=64MB  -s TOTAL_STACK=32MB -lrt -ldl -lpthread $(LDFLAGS)
 
   CLEANCMD = rm -rf $(JUCE_OUTDIR)/$(TARGET) $(JUCE_OBJDIR)
 endif

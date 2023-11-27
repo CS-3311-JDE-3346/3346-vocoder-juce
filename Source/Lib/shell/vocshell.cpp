@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "vocshell.h"
+#include <iostream>
 
 int write_wave_file ( const char* filename, unsigned int sample_rate, unsigned int channels, float* buffer, drwav_uint64 frames, float gain )
 {
@@ -35,6 +37,7 @@ int write_wave_file ( const char* filename, unsigned int sample_rate, unsigned i
     converted = ( drwav_int16* ) malloc ( ( size_t ) ( frames * channels ) * sizeof ( drwav_int16 ) );
     if ( converted == NULL )
     {
+        std::cout << "Conversion failure" << std::endl;
         return 0;
     }
     drwav_f32_to_s16 ( converted, buffer, ( size_t ) frames * channels );
@@ -42,12 +45,14 @@ int write_wave_file ( const char* filename, unsigned int sample_rate, unsigned i
     outfile = drwav_open_file_write_sequential ( filename, &format, frames * channels );
     if ( outfile == NULL )
     {
+        std::cout << "Unable to open file to write" << std::endl;
         free ( converted );
         return 0;
     }
 
     if ( drwav_write ( outfile, frames * channels, &converted[0] ) != frames * channels )
     {
+        std::cout << "Unable to write out to file" << std::endl;
         drwav_close ( outfile );
         free ( converted );
         return 0;
@@ -75,7 +80,7 @@ float vocshell_find_peak ( float* buffer, drwav_uint64 frames )
 }
 
 // was just main() for original shell program
-int main_Shell ( int argc, const char** argv )
+int main_Shell( int argc, const char** argv )
 {
     unsigned long bands = 24;
     unsigned long filters_per_band = 4;

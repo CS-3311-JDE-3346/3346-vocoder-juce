@@ -8,7 +8,9 @@
 
 #include <JuceHeader.h>
 #include "Vocoder.h"
+#include <string>
 #include "Tests/TestsHeader.h"
+#include "Lib/shell/vocshell.h"
 
 #ifdef EMSCRIPTEN
 #include <emscripten/emscripten.h>
@@ -19,15 +21,12 @@ void startupMsg();
 void loop(const juce::ArgumentList& args);
 
 //==============================================================================
-#ifdef EMSCRIPTEN
-EMSCRIPTEN_KEEPALIVE
-#endif
 int main (int argc, char* argv[])
 {
     juce::ConsoleApplication app;
     app.addHelpCommand("--help|-h", "Usage:", true);
     app.addVersionCommand("--version|-v", "Vocoder (Headless) v0.01");
-    app.addDefaultCommand({
+    app.addCommand({
         "--tests|-t",
         "--tests | -t",
         "Run tests",
@@ -37,14 +36,29 @@ int main (int argc, char* argv[])
             Tests::RunAllTests();
         }
     });
-    app.addCommand({
+    app.addDefaultCommand({
         "--run|-r",
         "--run | -r",
         "Run vocoder",
         "Voclib will produce an output to Assets/out",
         [](const auto& args)
         {
-            std::cout << "Not implemented yet" << std::endl;
+            //std::cout << "Not implemented yet" << std::endl;
+            std::string carrierPath = (Vocoder::defaultInputPath + Vocoder::defaultCarrierSample_Saw).toStdString();
+            std::string modulatorPath = (Vocoder::defaultInputPath + Vocoder::defaultModulatorSample).toStdString();
+            std::string outputPath = (Vocoder::defaultOutputPath + "output.wav").toStdString();
+            std::vector<const char*> argvec{"args", "-c", carrierPath.c_str(), "-m", modulatorPath.c_str(), "-o", outputPath.c_str()};
+            
+            std::cout << "voclib args:" << std::endl;
+            for (const char* i : argvec)
+            {
+                std::cout << i << ' ';
+            }
+            std::cout << std::endl;
+
+            const char** argv = argvec.data();
+            auto argc = argvec.size();
+            main_Shell(argc, argv);
         }
     });
     app.addCommand({
@@ -60,25 +74,15 @@ int main (int argc, char* argv[])
     return app.findAndRunCommand(argc, argv);
 }
 
-int main_em(int command)
+void main_em(int command)
 {
-    std::cout << "Mode: " << command << std::endl;
     switch (command)
     {
     case 0:
-    {
-        char* argv[] = { "-v" };
-        main(1, { argv });
-    }
-        break;
-    case 1:
-    {
-        char* argv[] = { "-r" };
-        main(1, { argv });
-    }
+        //main_Shell();
         break;
     default:
-        main(0, nullptr);
+        std::cout << "Invalid command." << std::endl;
     }
 }
 

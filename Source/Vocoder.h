@@ -16,14 +16,13 @@
 class Vocoder
 {
 public:
-    juce::String defaultInputPath = "./Assets/";
-    juce::String defaultOutputPath = "./Assets/out";
-private:
-    juce::String defaultModulatorSample = "modulator_f32_mono.wav";
-    juce::String defaultCarrierSample_Sine = "sine_440hz_f32_mono.wav";
-    juce::String defaultCarrierSample_Saw = "saw_440hz_f32_mono.wav";
-    juce::String defaultCarrierSample_Square = "square_440hz_f32_mono.wav";
-    juce::String defaultCarrierSample_Triangle = "triangle_440hz_f32_mono.wav";
+    static juce::String defaultInputPath;
+    static juce::String defaultOutputPath;
+    static juce::String defaultModulatorSample;
+    static juce::String defaultCarrierSample_Sine;
+    static juce::String defaultCarrierSample_Saw;
+    static juce::String defaultCarrierSample_Square;
+    static juce::String defaultCarrierSample_Triangle;
 public:
     Vocoder();
     //~Vocoder();
