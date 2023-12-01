@@ -123,7 +123,6 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
         if (!check) throw msg + new Error().stack;
       }
 Module['FS_createPath']("/", "Assets", true, true);
-Module['FS_createPath']("/Assets", "out", true, true);
 
       /** @constructor */
       function DataRequest(start, end, audio) {
@@ -191,7 +190,7 @@ Module['FS_createPath']("/Assets", "out", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/Assets/modulator_f32_mono.wav", "start": 0, "end": 629536, "audio": 1}, {"filename": "/Assets/out/.persist", "start": 629536, "end": 629536}, {"filename": "/Assets/saw_440hz_f32_mono.wav", "start": 629536, "end": 1688016, "audio": 1}, {"filename": "/Assets/silence.wav", "start": 1688016, "end": 1688272, "audio": 1}, {"filename": "/Assets/sine_440hz_f32_mono.wav", "start": 1688272, "end": 2746752, "audio": 1}, {"filename": "/Assets/square_440hz_f32_mono.wav", "start": 2746752, "end": 3805232, "audio": 1}, {"filename": "/Assets/triangle_440hz_f32_mono.wav", "start": 3805232, "end": 4863712, "audio": 1}], "remote_package_size": 4863712});
+    loadPackage({"files": [{"filename": "/Assets/modulator_f32_mono.wav", "start": 0, "end": 629536, "audio": 1}, {"filename": "/Assets/saw_220hz_f32_mono.wav", "start": 629536, "end": 1688016, "audio": 1}, {"filename": "/Assets/silence.wav", "start": 1688016, "end": 1688272, "audio": 1}, {"filename": "/Assets/sine_220hz_f32_mono.wav", "start": 1688272, "end": 2746752, "audio": 1}, {"filename": "/Assets/square_220hz_f32_mono.wav", "start": 2746752, "end": 3805232, "audio": 1}, {"filename": "/Assets/triangle_220hz_f32_mono.wav", "start": 3805232, "end": 4863712, "audio": 1}], "remote_package_size": 4863712});
 
   })();
 
