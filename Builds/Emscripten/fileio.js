@@ -46,7 +46,7 @@ function initControls() {
                     console.log("writing file to FS");
                     const binary = new Uint8Array(content);
                     FS.writeFile("./Assets/" + modulatorFileInput.files[0].name, binary, { flags: "w" });
-                    vocoder.setCarrierFilename(modulatorFileInput.files[0].name);
+                    vocoder.setModulatorFilename(modulatorFileInput.files[0].name);
                 }
             } catch (e) {
                 console.warn(e.message);
