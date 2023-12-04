@@ -27,6 +27,8 @@ If compiling in WSL, make sure the following changes are made to the juce_empscr
 #include <sys/ptrace.h>
 ```
 
+# Setup instructions
+
 ## Setup Clang (if missing)
 https://ubuntuhandbook.org/index.php/2023/09/how-to-install-clang-17-or-16-in-ubuntu-22-04-20-04/
 
@@ -37,12 +39,14 @@ Follow the Linux setup instructions. If using WSL, the same instructions apply.
 
 ## Compiling with Emscripten
 
+- Do not use JUCE_emscripten's or the offical JUCE repo's version of Projucer to resave the Emscripten build target! Instead, build and run Projucer from our forked [JUCE-emmake](https://github.com/CS-3311-JDE-3346/JUCE-emmake) repo
 - todo
 
 ## Using
 
 C++
-Juce Framework
+JUCE Framework
+Voclib (https://github.com/blastbay/voclib/tree/master)
 
 ## Reasoning
 
