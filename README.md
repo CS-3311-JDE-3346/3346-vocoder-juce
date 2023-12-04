@@ -4,7 +4,7 @@ Compilation must be done either in Linux or in WSL.
 
 ## Setup JUCE_emscripten
 
-- `git clone https://github.com/Dreamtonics/juce_emscripten.git`
+`git clone https://github.com/Dreamtonics/juce_emscripten.git`
 
 ### Subtle changes to juce_emscripten
 
@@ -34,7 +34,8 @@ https://ubuntuhandbook.org/index.php/2023/09/how-to-install-clang-17-or-16-in-ub
 
 ## Setup Emscripten
 
-Instructions to setup Emscripten environment can be found here: https://emscripten.org/docs/getting_started/downloads.html
+Instructions to setup Emscripten environment can be found here: https://emscripten.org/docs/getting_started/downloads.html.
+
 Follow the Linux setup instructions. If using WSL, the same instructions apply.
 
 ## Compiling with Emscripten
@@ -42,12 +43,12 @@ Follow the Linux setup instructions. If using WSL, the same instructions apply.
 - Do not use JUCE_emscripten's or the offical JUCE repo's version of Projucer to resave the Emscripten build target! Instead, build and run Projucer from our forked [JUCE-emmake](https://github.com/CS-3311-JDE-3346/JUCE-emmake) repo
 - todo
 
-## Using
+# Using
 
-C++
-JUCE Framework
-Voclib (https://github.com/blastbay/voclib/tree/master)
+- C++
+- JUCE Framework
+- [Voclib] (https://github.com/blastbay/voclib/tree/master)
 
-## Reasoning
+# Reasoning
 
 The first MVP we targetted was getting basic functionality of the vocoder. The reasoning we chose this as our first MVP was because we need to have basic functionality before we try to add aditional features, as the additional features build off the basic functionality.
