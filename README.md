@@ -51,7 +51,7 @@ Follow the Linux setup instructions. If using WSL, the same instructions apply.
 
 - C++
 - JUCE Framework
-- [Voclib] (https://github.com/blastbay/voclib/tree/master)
+- [Voclib](https://github.com/blastbay/voclib/tree/master)
 
 # Reasoning
 
