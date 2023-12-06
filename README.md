@@ -41,7 +41,11 @@ Follow the Linux setup instructions. If using WSL, the same instructions apply.
 ## Compiling with Emscripten
 
 - Do not use JUCE_emscripten's or the offical JUCE repo's version of Projucer to resave the Emscripten build target! Instead, build and run Projucer from our forked [JUCE-emmake](https://github.com/CS-3311-JDE-3346/JUCE-emmake) repo
-- todo
+- Navigate to the Emscripten build target directory
+- `cd Builds/Emscripten`
+- Run emmake on the makefile
+- `emmake make`
+- If using in another project, make sure to copy `vocoder.js`, `vocoder.wasm`, and `vocoder.data` to the same folder
 
 # Using
 
