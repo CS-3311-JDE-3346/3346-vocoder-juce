@@ -307,6 +307,7 @@ The next time you run the `emscripten` alias in a fresh shell, `npm` will use th
 To start the `live-server`, simply run:
 
 ```bash
+cd ~/dev/projects/3346-vocoder-juce/Builds/Emscripten
 live-server ./test_load.html
 ```
 
